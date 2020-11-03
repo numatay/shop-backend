@@ -37,7 +37,7 @@ const serverlessConfiguration: Serverless = {
         {
           httpApi: {
             method: 'GET',
-            path: 'products',
+            path: '/products',
           }
         }
       ]
@@ -48,7 +48,7 @@ const serverlessConfiguration: Serverless = {
         {
           httpApi: {
             method: 'GET',
-            path: 'products/{productId}',
+            path: '/products/{productId}',
           }
         }
       ]
