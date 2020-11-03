@@ -1,10 +1,22 @@
-export const getProductById = async (_event, _context) => {
-    console.log("Event:", _event);
-    return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless Webpack (Typescript) v1.0! Your function executed successfully!',
-      input: _event,
-    }, null, 2),
-  };
+import db from "./db";
+
+export const getProductById = async (event, _context) => {
+
+    const { pathParameters } = event;
+    console.log("Event:", event, pathParameters);
+    const { productId } = event.pathParameters;
+    try {
+        const product = await db.getProductById(productId as string);
+        return {
+            statusCode: 200,
+            body: JSON.stringify(product),
+        };
+    } catch(err) {
+        return {
+            statusCode: 404,
+            body: JSON.stringify({
+                errorMessage: err.message
+            })
+        }
+    }
 }
