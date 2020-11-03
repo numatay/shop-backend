@@ -1,18 +1,14 @@
+import {APIGatewayProxyHandler} from "aws-lambda";
 import db from "./db";
+import {addCorsHeaders} from "./utils";
 
-export const getProductById = async (event, _context) => {
-
-    const { pathParameters } = event;
-    console.log("Event:", event, pathParameters);
+export const getProductById: APIGatewayProxyHandler  = async (event, _context) => {
     const { productId } = event.pathParameters;
     try {
         const product = await db.getProductById(productId as string);
         return {
             statusCode: 200,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
-            },
+            headers: addCorsHeaders(),
             body: JSON.stringify(product),
         };
     } catch(err) {

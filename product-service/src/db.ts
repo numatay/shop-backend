@@ -21,14 +21,14 @@ class DatabaseServiceMock {
         });
     }
 
-    async getProducts() {
-        return Array.from(this.products.values());
+    getProducts() {
+        return Promise.resolve(Array.from(this.products.values()));
     }
 
-    async getProductById(id: string) {
+    getProductById(id: string): PromiseLike<Product> {
         const product = this.products.get(id);
         if (product) {
-            return product;
+            return Promise.resolve(product);
         } else {
             throw new Error(`Product with '${id}' not found`);
         }

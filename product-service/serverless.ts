@@ -19,11 +19,15 @@ const serverlessConfiguration: Serverless = {
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
+    region: 'eu-west-1',
     apiGateway: {
       minimumCompressionSize: 1024,
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+    },
+    httpApi: {
+      cors: true,
     },
   },
   functions: {
@@ -31,10 +35,9 @@ const serverlessConfiguration: Serverless = {
       handler: 'handler.getAllProducts',
       events: [
         {
-          http: {
-            method: 'get',
+          httpApi: {
+            method: 'GET',
             path: 'products',
-            cors: true,
           }
         }
       ]
@@ -43,10 +46,9 @@ const serverlessConfiguration: Serverless = {
       handler: 'handler.getProductById',
       events: [
         {
-          http: {
-            method: 'get',
+          httpApi: {
+            method: 'GET',
             path: 'products/{productId}',
-            cors: true,
           }
         }
       ]
