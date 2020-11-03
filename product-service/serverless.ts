@@ -46,9 +46,10 @@ const serverlessConfiguration: Serverless = {
       handler: 'handler.getProductById',
       events: [
         {
-          httpApi: {
+          http: {
             method: 'GET',
             path: '/products/{productId}',
+            cors: true
           }
         }
       ]
