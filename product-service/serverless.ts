@@ -3,9 +3,6 @@ import type { Serverless } from 'serverless/aws';
 const serverlessConfiguration: Serverless = {
   service: {
     name: 'product-service',
-    // app and org for use with dashboard.serverless.com
-    // app: your-app-name,
-    // org: your-org-name,
   },
   frameworkVersion: '2',
   custom: {
@@ -25,9 +22,11 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-    },
-    httpApi: {
-      cors: true,
+      PG_HOST: 'numatay-db-task-4.cnqouwirfjbt.eu-west-1.rds.amazonaws.com',
+      PG_PORT: 5432,
+      PG_DATABASE: 'postgres',
+      PG_USERNAME: 'postgres',
+      PG_PASSWORD: '',
     },
   },
   functions: {
@@ -35,9 +34,10 @@ const serverlessConfiguration: Serverless = {
       handler: 'handler.getAllProducts',
       events: [
         {
-          httpApi: {
+          http: {
             method: 'GET',
             path: '/products',
+            cors: true
           }
         }
       ]
