@@ -8,7 +8,7 @@ export const createProduct: APIGatewayProxyHandler  = async (event, _context) =>
     const { title, description, price, count } = JSON.parse(event.body);
     console.log(title, description, price, count);
     try {
-        const productId = await db.createProduct({ title, description, price });
+        const productId = await db.createProduct({ title, description, price, count });
         return {
             statusCode: 201,
             headers: addCorsHeaders(),
