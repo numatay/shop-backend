@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "deploy": "serverless deploy -s dev -v",
-    "invoke:products": "serverless invoke local --function getAllProducts",
+    "invoke:getProducts": "serverless invoke local --function getAllProducts",
+    "invoke:createProduct": "serverless invoke local --function createProduct --path ./src/mock/event.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
