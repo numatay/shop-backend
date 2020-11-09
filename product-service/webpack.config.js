@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const slsw = require('serverless-webpack');
 const nodeExternals = require('webpack-node-externals');
 
@@ -40,12 +41,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // new ForkTsCheckerWebpackPlugin({
-    //   eslint: true,
-    //   eslintOptions: {
-    //     cache: true
-    //   }
-    // })
     new webpack.IgnorePlugin(/^pg-native$/)
   ],
 };
