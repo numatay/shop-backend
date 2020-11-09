@@ -11,13 +11,13 @@ export interface Product {
 
 const selectProductsQuery = `
     SELECT * 
-    FROM "task-04".products;
+    FROM products;
 `;
 
 const selectProductByIdQuery = `
     SELECT p.id, p.title, p.description, p.price, s.count
-    FROM "task-04".products AS p
-    LEFT JOIN "task-04".stocks AS s
+    FROM products AS p
+    LEFT JOIN stocks AS s
     ON p.id = s.product_id
     WHERE p.id = $1;
 `;
@@ -34,7 +34,6 @@ class ProductRepository {
             connectionTimeoutMillis: 5000
         });
     }
-
 
     async getProducts() {
         let client;
