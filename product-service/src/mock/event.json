@@ -1,32 +1,60 @@
 {
-  "resource": "/products/{productId}",
-  "path": "/products/d487b432-7cf2-4763-912e-8bbbd72392ab",
-  "httpMethod": "GET",
+  "body": {
+    "title": "Siyir",
+    "description": "Ademi siyir",
+    "price": 500.9,
+    "count": 10
+  },
+  "resource": "/{proxy+}",
+  "path": "/path/to/resource",
+  "httpMethod": "POST",
+  "isBase64Encoded": true,
+  "queryStringParameters": {
+    "foo": "bar"
+  },
+  "multiValueQueryStringParameters": {
+    "foo": [
+      "bar"
+    ]
+  },
+  "pathParameters": {
+    "proxy": "/path/to/resource"
+  },
+  "stageVariables": {
+    "baz": "qux"
+  },
   "headers": {
-    "Accept": "*/*",
-    "Accept-Encoding": "gzip, deflate, br",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, sdch",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Cache-Control": "max-age=0",
     "CloudFront-Forwarded-Proto": "https",
     "CloudFront-Is-Desktop-Viewer": "true",
     "CloudFront-Is-Mobile-Viewer": "false",
     "CloudFront-Is-SmartTV-Viewer": "false",
     "CloudFront-Is-Tablet-Viewer": "false",
-    "CloudFront-Viewer-Country": "RU",
-    "Host": "g7wiw0v6af.execute-api.eu-west-1.amazonaws.com",
-    "Postman-Token": "fde7b77a-1ccb-40a5-948c-86f41def1327",
-    "User-Agent": "PostmanRuntime/7.26.5",
-    "Via": "1.1 b44f106cb108901846bfcc9a6508c901.cloudfront.net (CloudFront)",
-    "X-Amz-Cf-Id": "yAp97V1T4nOxAjmC1cxjzEVYd0wJ0PMzIOWe7mDayabSSSmE1PFuIA==",
-    "X-Amzn-Trace-Id": "Root=1-5fa12381-31a71a5415970aca2a9966e5",
-    "X-Forwarded-For": "185.44.13.36, 52.46.36.116",
+    "CloudFront-Viewer-Country": "US",
+    "Host": "1234567890.execute-api.eu-west-1.amazonaws.com",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Custom User Agent String",
+    "Via": "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Id": "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA==",
+    "X-Forwarded-For": "127.0.0.1, 127.0.0.2",
     "X-Forwarded-Port": "443",
     "X-Forwarded-Proto": "https"
   },
   "multiValueHeaders": {
     "Accept": [
-      "*/*"
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
     ],
     "Accept-Encoding": [
-      "gzip, deflate, br"
+      "gzip, deflate, sdch"
+    ],
+    "Accept-Language": [
+      "en-US,en;q=0.8"
+    ],
+    "Cache-Control": [
+      "max-age=0"
     ],
     "CloudFront-Forwarded-Proto": [
       "https"
@@ -44,28 +72,25 @@
       "false"
     ],
     "CloudFront-Viewer-Country": [
-      "RU"
+      "US"
     ],
     "Host": [
-      "g7wiw0v6af.execute-api.eu-west-1.amazonaws.com"
+      "0123456789.execute-api.eu-west-1.amazonaws.com"
     ],
-    "Postman-Token": [
-      "fde7b77a-1ccb-40a5-948c-86f41def1327"
+    "Upgrade-Insecure-Requests": [
+      "1"
     ],
     "User-Agent": [
-      "PostmanRuntime/7.26.5"
+      "Custom User Agent String"
     ],
     "Via": [
-      "1.1 b44f106cb108901846bfcc9a6508c901.cloudfront.net (CloudFront)"
+      "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)"
     ],
     "X-Amz-Cf-Id": [
-      "yAp97V1T4nOxAjmC1cxjzEVYd0wJ0PMzIOWe7mDayabSSSmE1PFuIA=="
-    ],
-    "X-Amzn-Trace-Id": [
-      "Root=1-5fa12381-31a71a5415970aca2a9966e5"
+      "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA=="
     ],
     "X-Forwarded-For": [
-      "185.44.13.36, 52.46.36.116"
+      "127.0.0.1, 127.0.0.2"
     ],
     "X-Forwarded-Port": [
       "443"
@@ -74,42 +99,30 @@
       "https"
     ]
   },
-  "queryStringParameters": null,
-  "multiValueQueryStringParameters": null,
-  "pathParameters": {
-    "productId": "d487b432-7cf2-4763-912e-8bbbd72392ab"
-  },
-  "stageVariables": null,
   "requestContext": {
-    "resourceId": "krv3k1",
-    "resourcePath": "/products/{productId}",
-    "httpMethod": "GET",
-    "extendedRequestId": "VbJ8OGHEjoEFlEA=",
-    "requestTime": "03/Nov/2020:09:31:45 +0000",
-    "path": "/dev/products/d487b432-7cf2-4763-912e-8bbbd72392ab",
-    "accountId": "467059390610",
-    "protocol": "HTTP/1.1",
-    "stage": "dev",
-    "domainPrefix": "g7wiw0v6af",
-    "requestTimeEpoch": 1604395905359,
-    "requestId": "37f4b57c-228a-4f18-9ad6-68851aeb5bf7",
+    "accountId": "123456789012",
+    "resourceId": "123456",
+    "stage": "prod",
+    "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+    "requestTime": "09/Apr/2015:12:34:56 +0000",
+    "requestTimeEpoch": 1428582896000,
     "identity": {
       "cognitoIdentityPoolId": null,
       "accountId": null,
       "cognitoIdentityId": null,
       "caller": null,
-      "sourceIp": "185.44.13.36",
-      "principalOrgId": null,
       "accessKey": null,
+      "sourceIp": "127.0.0.1",
       "cognitoAuthenticationType": null,
       "cognitoAuthenticationProvider": null,
       "userArn": null,
-      "userAgent": "PostmanRuntime/7.26.5",
+      "userAgent": "Custom User Agent String",
       "user": null
     },
-    "domainName": "g7wiw0v6af.execute-api.eu-west-1.amazonaws.com",
-    "apiId": "g7wiw0v6af"
-  },
-  "body": null,
-  "isBase64Encoded": false
+    "path": "/prod/path/to/resource",
+    "resourcePath": "/{proxy+}",
+    "httpMethod": "POST",
+    "apiId": "1234567890",
+    "protocol": "HTTP/1.1"
+  }
 }

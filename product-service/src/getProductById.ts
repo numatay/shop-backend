@@ -3,6 +3,8 @@ import db from "./db";
 import {addCorsHeaders} from "./utils";
 
 export const getProductById: APIGatewayProxyHandler  = async (event, _context) => {
+    console.log(`Request event: ${JSON.stringify(event)} context: ${JSON.stringify(_context)}`);
+
     const { productId } = event.pathParameters;
     try {
         const product = await db.getProductById(productId as string);
