@@ -1,28 +1,28 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
-import { S3 } from "aws-sdk";
+import * as AWS from "aws-sdk";
+
+const BUCKET_REGION = "eu-west-1";
 
 export const importProductsFile: APIGatewayProxyHandler = async (
   event,
   _context
 ) => {
-  const credentials = {
+  const { name } = event.queryStringParameters;
+  AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_KEY,
-  };
-  const { name } = event.queryStringParameters;
+  });
+  const s3 = new AWS.S3({ region: BUCKET_REGION, signatureVersion: "v4" });
 
-  console.log(credentials, name);
+  const presignedPUTURL = await s3.getSignedUrlPromise("putObject", {
+    Bucket: "numatay-aws-task05-bucket",
+    Key: `uploaded/${name}.csv`,
+    ContentType: "text/csv",
+    Expires: 100,
+  });
 
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      {
-        message:
-          "Go Serverless Webpack (Typescript) v1.0! Your function executed successfully!",
-        input: event,
-      },
-      null,
-      2
-    ),
+    body: presignedPUTURL,
   };
 };

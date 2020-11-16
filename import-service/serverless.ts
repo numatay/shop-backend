@@ -24,7 +24,20 @@ const serverlessConfiguration: Serverless = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       AWS_SECRET_KEY: process.env.AWS_SECRET_KEY,
       AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
+      BUCKET_NAME: process.env.BUCKET_NAME,
     },
+    iamRoleStatements: [
+      {
+        Effect: "Allow",
+        Action: "s3:ListBucket",
+        Resource: "arn:aws:s3:::numatay-aws-task05-bucket",
+      },
+      {
+        Effect: "Allow",
+        Action: "s3:*",
+        Resource: "arn:aws:s3:::numatay-aws-task05-bucket/*",
+      },
+    ],
   },
   functions: {
     importProductsFile: {
@@ -34,6 +47,25 @@ const serverlessConfiguration: Serverless = {
           http: {
             method: "get",
             path: "/import",
+            cors: true,
+          },
+        },
+      ],
+    },
+    importFileParser: {
+      handler: "handler.importFileParser",
+      events: [
+        {
+          s3: {
+            bucket: "numatay-aws-task05-bucket",
+            event: "s3:ObjectCreated:*",
+            rules: [
+              {
+                prefix: "uploaded/",
+                suffix: "",
+              },
+            ],
+            existing: true,
           },
         },
       ],
