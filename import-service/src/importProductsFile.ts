@@ -14,15 +14,15 @@ export const importProductsFile: APIGatewayProxyHandler = async (
   });
   const s3 = new AWS.S3({ region: BUCKET_REGION, signatureVersion: "v4" });
 
-  const presignedPUTURL = await s3.getSignedUrlPromise("putObject", {
+  const signedUrl = await s3.getSignedUrlPromise("putObject", {
     Bucket: "numatay-aws-task05-bucket",
-    Key: `uploaded/${name}.csv`,
+    Key: `uploaded/${name}`,
     ContentType: "text/csv",
     Expires: 100,
   });
 
   return {
     statusCode: 200,
-    body: presignedPUTURL,
+    body: signedUrl,
   };
 };

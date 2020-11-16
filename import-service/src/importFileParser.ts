@@ -45,7 +45,7 @@ export const importFileParser = async (event, _context) => {
         })
         .promise();
     } catch (err) {
-      console.log("Error occured:", err);
+      console.log("Error occurred:", err);
       return {
         statusCode: 500,
       };
