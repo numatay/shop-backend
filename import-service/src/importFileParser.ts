@@ -27,23 +27,25 @@ export const importFileParser = async (event, _context) => {
           .pipe(csv())
           .on("data", (data) => console.log(data))
           .on("error", reject)
-          .on("end", resolve);
+          .on("end", async () => {
+            await s3
+              .copyObject({
+                Bucket: bucket.name,
+                CopySource: `${bucket.name}/${object.key}`,
+                Key: object.key.replace("uploaded", "parsed"),
+              })
+              .promise();
+
+            await s3
+              .deleteObject({
+                Bucket: bucket.name,
+                Key: object.key,
+              })
+              .promise();
+
+            resolve();
+          });
       });
-
-      await s3
-        .copyObject({
-          Bucket: bucket.name,
-          CopySource: `${bucket.name}/${object.key}`,
-          Key: object.key.replace("uploaded", "parsed"),
-        })
-        .promise();
-
-      await s3
-        .deleteObject({
-          Bucket: bucket.name,
-          Key: object.key,
-        })
-        .promise();
     } catch (err) {
       console.log("Error occurred:", err);
       return {
