@@ -1,5 +1,6 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import * as AWS from "aws-sdk";
+import { addCorsHeaders } from "../../product-service/src/utils";
 
 const BUCKET_REGION = "eu-west-1";
 
@@ -23,6 +24,7 @@ export const importProductsFile: APIGatewayProxyHandler = async (
 
   return {
     statusCode: 200,
+    headers: addCorsHeaders(),
     body: signedUrl,
   };
 };
