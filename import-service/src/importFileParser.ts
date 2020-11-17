@@ -1,12 +1,12 @@
 import * as AWS from "aws-sdk";
 import * as csv from "csv-parser";
 
-const BUCKET_REGION = "eu-west-1";
+const { BUCKET_REGION, SECRET_KEY, ACCESS_KEY } = process.env;
 
 export const importFileParser = async (event, _context) => {
   AWS.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY,
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_KEY,
   });
 
   for (const record of event?.Records) {

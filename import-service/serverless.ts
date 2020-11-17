@@ -22,8 +22,8 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
-      AWS_SECRET_KEY: process.env.AWS_SECRET_KEY,
-      AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
+      AWS_SECRET_KEY: process.env.SECRET_KEY,
+      AWS_ACCESS_KEY: process.env.ACCESS_KEY,
       BUCKET_NAME: process.env.BUCKET_NAME,
     },
     iamRoleStatements: [
