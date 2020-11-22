@@ -25,7 +25,10 @@ export const importFileParser = async (event, _context) => {
         s3.getObject(params)
           .createReadStream()
           .pipe(csv())
-          .on("data", (data) => console.log(data))
+          .on("data", (data) => {
+            console.log(data);
+            // integrate with SQS
+          })
           .on("error", reject)
           .on("end", async () => {
             await s3
