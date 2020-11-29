@@ -106,7 +106,7 @@ const serverlessConfiguration: Serverless = {
       events: [
         {
           sqs: {
-            batchSize: 5,
+            batchSize: 1,
             arn: {
               "Fn::GetAtt": ["CatalogItemsQueue", "Arn"],
             },
