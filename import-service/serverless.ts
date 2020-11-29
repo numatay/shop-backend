@@ -11,7 +11,6 @@ const serverlessConfiguration: Serverless = {
       includeModules: true,
     },
   },
-  // Add the serverless-webpack plugin
   plugins: ["serverless-webpack", "serverless-dotenv-plugin"],
   provider: {
     name: "aws",
@@ -25,6 +24,9 @@ const serverlessConfiguration: Serverless = {
       AWS_SECRET_KEY: process.env.SECRET_KEY,
       AWS_ACCESS_KEY: process.env.ACCESS_KEY,
       BUCKET_NAME: process.env.BUCKET_NAME,
+      CATALOG_QUEUE_URL: {
+        "Fn::ImportValue": "CatalogItemsQueueUrl",
+      },
     },
     iamRoleStatements: [
       {
@@ -36,6 +38,11 @@ const serverlessConfiguration: Serverless = {
         Effect: "Allow",
         Action: "s3:*",
         Resource: "arn:aws:s3:::numatay-aws-task05-bucket/*",
+      },
+      {
+        Effect: "Allow",
+        Action: "sqs:*",
+        Resource: "arn:aws:sqs:eu-west-1:467059390610:catalogItemsQueue",
       },
     ],
   },
