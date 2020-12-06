@@ -26,23 +26,27 @@ export const importFileParser: S3Handler = async (event, _context) => {
         Key: object.key,
       };
       const s3 = new AWS.S3({ region: BUCKET_REGION, signatureVersion: "v4" });
-      const sqs = new AWS.SQS();
+      const sqs = new AWS.SQS({ region: BUCKET_REGION });
 
       await new Promise((resolve, reject) => {
         s3.getObject(params)
           .createReadStream()
           .pipe(csv())
-          .on("data", async (data) => {
-            console.log("DATA:", data);
-            try {
-              const params = {
-                MessageBody: JSON.stringify(data),
+          .on("data", (data) => {
+            console.log(data);
+            sqs.sendMessage(
+              {
                 QueueUrl: CATALOG_QUEUE_URL,
-              };
-              await sqs.sendMessage(params).promise();
-            } catch (err) {
-              console.log("Error in try block:", err);
-            }
+                MessageBody: JSON.stringify(data),
+              },
+              () => {
+                console.log(
+                  `Send message with ${JSON.stringify(
+                    data
+                  )} to ${CATALOG_QUEUE_URL}`
+                );
+              }
+            );
           })
           .on("error", reject)
           .on("end", async () => {
